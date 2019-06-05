@@ -14,7 +14,8 @@ class ApiContactController extends Controller
      */
     public function index()
     {
-        //
+			$contacts = Contact::all();
+			return $contacts;
     }
 
     /**
@@ -51,7 +52,8 @@ class ApiContactController extends Controller
      */
     public function show($id)
     {
-        //
+			$contact = Contact::findOrFail($id);
+			return $contact;
     }
 
     /**
@@ -74,7 +76,12 @@ class ApiContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+			$contact = Contact::findOrFail($id);
+			$contact->name = request('name');
+			$contact->address = request('address');
+			$contact->phone = request('phone');
+			$contact->save();
+			return $contact;
     }
 
     /**
